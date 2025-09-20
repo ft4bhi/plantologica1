@@ -13,6 +13,8 @@ export const metadata: Metadata = {
     "Smart plant companion: compare real-time soil readings to optimal ranges and get care suggestions.",
 };
 
+import BottomNav from '@/components/BottomNav';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100">
-        {children}
+        <div className="pb-16"> {/* Add padding to account for fixed bottom nav */}
+          {children}
+        </div>
+        <BottomNav />
       </body>
     </html>
   );
