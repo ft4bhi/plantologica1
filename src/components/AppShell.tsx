@@ -156,9 +156,10 @@ const BottomNav = () => {
   
   // Modern plant app navigation
   const mobileNavClasses = `
-    fixed bottom-0 left-0 right-0 z-50 sm:hidden
-    glass-nav border-t border-white/20
-    shadow-[0_-8px_32px_rgba(26,46,34,0.08)]
+    fixed bottom-0 left-0 right-0 z-50
+    bg-white/80 backdrop-blur-lg
+    border-t border-gray-100
+    shadow-lg
   `;
 
   const NavItem = React.memo(function NavItem({ 
@@ -168,117 +169,35 @@ const BottomNav = () => {
     active: isActive = false 
   }: NavItemProps & { active?: boolean }) {
     const [mounted, setMounted] = React.useState(false);
-    const elementRef = React.useRef<HTMLDivElement>(null);
     const active = isActive || pathname === href;
     
-    // Set mounted state on client
     React.useEffect(() => {
       setMounted(true);
-      
-      // Clean up browser extension attributes after mount
-      const cleanAttributes = (el: Element) => {
-        if (!el || !el.attributes) return;
-        
-        const attributes = Array.from(el.attributes);
-        for (const attr of attributes) {
-          if (attr.name.startsWith('bis_') || 
-              attr.name.startsWith('_ng') ||
-              attr.name === 'data-v-app' ||
-              attr.name.startsWith('data-v-') ||
-              attr.name.startsWith('data-')) {
-            el.removeAttribute(attr.name);
-          }
-        }
-      };
-
-      const cleanup = () => {
-        if (elementRef.current) {
-          cleanAttributes(elementRef.current);
-          elementRef.current.querySelectorAll('*').forEach(cleanAttributes);
-        }
-      };
-      
-      // Initial cleanup
-      cleanup();
-      
-      // Cleanup on DOM mutations
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (mutation.type === 'attributes') {
-            if (mutation.target instanceof Element) {
-              cleanAttributes(mutation.target);
-            }
-          } else if (mutation.type === 'childList') {
-            mutation.addedNodes.forEach((node) => {
-              if (node instanceof Element) {
-                cleanAttributes(node);
-                node.querySelectorAll('*').forEach(cleanAttributes);
-              }
-            });
-          }
-        });
-      });
-      
-      if (elementRef.current) {
-        observer.observe(elementRef.current, {
-          attributes: true,
-          childList: true,
-          subtree: true,
-          attributeFilter: ['data-*', 'bis_*', '_ng*']
-        });
-      }
-      
-      return () => observer.disconnect();
     }, []);
     
-    // Don't render anything on server
     if (!mounted) {
       return (
-        <div className="w-full py-3 flex flex-col items-center justify-center text-sm font-medium text-transparent">
-          <div className="p-2 rounded-xl mb-1">
-            <Icon className="h-5 w-5" />
-          </div>
-          <span className="text-xs mt-0.5">...</span>
+        <div className="w-full py-2 flex flex-col items-center justify-center text-sm font-medium text-transparent">
+          <div className="h-6 w-6 rounded-full bg-gray-200 mb-1"></div>
+          <span className="text-xs">...</span>
         </div>
       );
     }
     
     return (
-      <div ref={elementRef} className="w-full px-2">
-        <Link 
-          href={href}
-          className={`relative w-full py-3 flex flex-col items-center justify-center 
-            text-sm font-medium transition-all duration-300 group ${
-              active 
-                ? 'text-green-700' 
-                : 'text-gray-600 hover:text-green-700'
-            }`}
-          title={label}
-          suppressHydrationWarning
-        >
-          <div 
-            className={`p-3 rounded-2xl mb-2 transition-all duration-300 ${
-              active 
-                ? 'glass-plant shadow-lg scale-105' 
-                : 'glass-subtle hover:glass-plant group-hover:scale-105'
-            }`}
-          >
-            <Icon 
-              className={`h-5 w-5 transition-all duration-300 plant-icon ${
-                active ? 'scale-110 text-green-600' : 'text-gray-600 group-hover:text-green-600'
-              }`} 
-            />
-          </div>
-          <span className={`text-xs font-medium transition-colors ${
-            active ? 'text-green-700 font-semibold' : 'text-gray-600 group-hover:text-green-700'
-          }`}>
-            {label}
-          </span>
-          {active && (
-            <div className="absolute -inset-1 bg-green-500/10 rounded-2xl -z-10" />
-          )}
-        </Link>
-      </div>
+      <Link 
+        href={href}
+        className={`flex-1 py-2 flex flex-col items-center justify-center transition-colors duration-200 ${
+          active ? 'text-green-600' : 'text-gray-500 hover:text-green-600'
+        }`}
+      >
+        <div className={`p-2 rounded-full mb-1 ${
+          active ? 'bg-green-100' : ''
+        }`}>
+          <Icon className={`h-5 w-5 ${active ? 'scale-110' : ''} transition-transform`} />
+        </div>
+        <span className="text-xs font-medium">{label}</span>
+      </Link>
     );
   });
 
@@ -320,85 +239,38 @@ const BottomNav = () => {
 
   const navItems = React.useMemo(() => [
     { href: '/', label: 'Home', icon: Home },
-    { href: '/library', label: 'Plants', icon: Leaf },
     { href: '/scan', label: 'Scan', icon: ScanLine },
+    { href: '/search', label: 'Search', icon: Search },
+    { href: '/library', label: 'Library', icon: BookOpen },
     { href: '/settings', label: 'Settings', icon: Settings },
   ], []);
 
   const sidebarItems = React.useMemo(() => [
     { href: '/', label: 'Home', icon: Home },
-    { href: '/library', label: 'Plants', icon: Leaf },
     { href: '/scan', label: 'Scan', icon: ScanLine },
+    { href: '/search', label: 'Search', icon: Search },
+    { href: '/library', label: 'Library', icon: BookOpen },
     { href: '/settings', label: 'Settings', icon: Settings },
   ], []);
 
   return (
-    <>
-      {/* Mobile Navigation */}
-      <nav className={mobileNavClasses}>
-        <div className="relative max-w-md mx-auto">
-          <div className="relative flex items-center justify-around px-3 py-4 mx-4 mb-4">
-            <div className="absolute inset-0 glass-nav rounded-3xl shadow-lg" />
-            {navItems.map((item) => {
-              const isActive = pathname === item.href || 
-                             (item.href !== '/' && pathname.startsWith(item.href));
-              return (
-                <NavItem 
-                  key={item.href}
-                  href={item.href}
-                  icon={item.icon}
-                  label={item.label}
-                  active={isActive}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </nav>
-
-      {/* Desktop Sidebar */}
-      <nav className="hidden sm:flex fixed left-0 top-0 bottom-0 w-20 2xl:w-24 glass-nav flex-col items-center py-6 z-40 border-r border-white/20">
-        <div className="flex-1 flex flex-col items-center space-y-6 w-full">
-          <Link href="/" className="w-full flex justify-center mb-4">
-            <div className="h-12 w-12 rounded-2xl glass-plant flex items-center justify-center group hover:scale-105 transition-transform">
-              <Leaf className="h-7 w-7 text-green-600 plant-icon group-hover:rotate-12" />
-            </div>
-          </Link>
-          
-          <div className="w-full space-y-2 px-2">
-            {sidebarItems.map((item) => (
-              <SidebarItem 
-                key={item.href}
-                href={item.href}
-                icon={item.icon}
-                label={item.label}
-                active={pathname === item.href || 
-                       (item.href !== '/' && pathname.startsWith(item.href))}
-              />
-            ))}
-          </div>
-        </div>
-        
-        <div className="w-full space-y-2 px-2">
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent("open-search"))}
-            className="w-full py-3 flex flex-col items-center text-gray-600 hover:text-green-700 rounded-2xl transition-all duration-300 group"
-            aria-label="Search plants"
-          >
-            <div className="p-3 rounded-2xl glass-subtle group-hover:glass-plant group-hover:scale-105 transition-all duration-300">
-              <Search className="h-5 w-5 plant-icon" />
-            </div>
-            <span className="text-xs mt-2 font-medium group-hover:text-green-700 transition-colors">Search</span>
-          </button>
-          <SidebarItem 
-            href="/settings" 
-            icon={Settings} 
-            label="Settings" 
-            active={pathname === '/settings'}
-          />
-        </div>
-      </nav>
-    </>
+    <nav className={mobileNavClasses}>
+      <div className="flex items-center justify-around h-16 px-2">
+        {navItems.map((item) => {
+          const isActive = pathname === item.href || 
+                         (item.href !== '/' && pathname.startsWith(item.href));
+          return (
+            <NavItem 
+              key={item.href}
+              href={item.href}
+              icon={item.icon}
+              label={item.label}
+              active={isActive}
+            />
+          );
+        })}
+      </div>
+    </nav>
   );
 };
 
