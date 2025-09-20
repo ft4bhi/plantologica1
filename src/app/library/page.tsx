@@ -48,11 +48,11 @@ export default function LibraryPage() {
               </div>
               <h3 className="font-medium text-green-900">{plant.name}</h3>
               <p className="text-xs text-green-600/70 line-clamp-2">
-                {plant.scientificName || 'Common plant'} • {plant.type || 'Vegetable'}
+                {plant.scientificName || 'Common plant'}
               </p>
-              <div className="mt-2 flex items-center justify-between">
-                <span className="text-xs px-2 py-1 bg-green-50 text-green-700 rounded-full">
-                  {plant.difficulty || 'Easy'}
+              <div className="mt-2">
+                <span className="inline-block text-xs px-2 py-1 bg-green-50 text-green-700 rounded-full">
+                  Learn more
                 </span>
                 <button className="text-green-600 hover:text-green-700">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right">

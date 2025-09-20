@@ -4,9 +4,6 @@ const nextConfig = {
   images: {
     domains: ['images.unsplash.com'],
   },
-  experimental: {
-    appDir: true,
-  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
