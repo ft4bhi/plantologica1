@@ -135,7 +135,7 @@ Thus, **Plantologica acts as a digital assistant for precision agriculture**, re
 
 ## 📂 PPT Presentation
 
-![](public/smartindia/SIH2025-IDEA-Presentation-Format\(2\)%20\(1\).pptx)
+![public/smartindia/SIH2025-IDEA-Presentation-Format\(2\)%20\(1\).pptx](public/smartindia/SIH2025-IDEA-Presentation-Format\(2\)%20\(1\).pptx)
 
 ---
 
