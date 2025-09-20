@@ -1,36 +1,189 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+# 🌱 Plantologica: Smart IoT Soil Health Monitor
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📌 Abstract
+
+**Plantologica** is a smart IoT-powered soil monitoring system integrated with a mobile application to help farmers and plant owners maintain optimal plant health.
+
+The system combines an **ESP32 microcontroller** with soil sensors to measure key parameters:
+
+* 🌊 Soil Moisture
+* 🌾 Nutrient Concentration (NPK)
+* ⚖️ Soil pH Levels
+
+Collected data is transmitted to a mobile application, where users select the plant type. The app compares **real-time soil readings** with **predefined optimal ranges** and presents results in a clear **two-column format**:
+
+* **Left Column:** Ideal values required by the plant
+* **Right Column:** Current soil condition
+
+The application then generates **actionable recommendations**:
+
+* 💧 Watering strategies when soil is dry
+* 🌿 Fertilizer type, amount, and usage instructions when nutrients are insufficient
+* 🧪 Soil treatment methods for pH imbalance
+
+Thus, **Plantologica acts as a digital assistant for precision agriculture**, reducing guesswork, improving yield, and supporting sustainable farming practices.
+
+---
+
+## 🎥 Demo
+
+![](public/smartindia/output.gif)
+
+---
+
+
+
+
+---
+
+## 🚀 Key Features
+
+* 📊 Real-time soil monitoring (Moisture, NPK, pH)
+* 🌱 Plant-specific optimal ranges
+* 🧾 Clear comparison: Ideal vs. Actual soil condition
+* 💡 Intelligent recommendations (water, fertilizer, soil treatment)
+* 📈 *(Future)* Historical trends & data visualization
+* 🌦️ *(Future)* Weather-based irrigation planning
+* 🤖 *(Future)* Automated smart irrigation system
+
+---
+
+## 🛠️ System Components
+
+### 1️⃣ Hardware
+
+* **Controller:** ESP32 (Wi-Fi + Bluetooth)
+* **Sensors:**
+
+  * Soil Moisture Sensor 🌊
+  * NPK Sensor 🌾
+  * Soil pH Sensor ⚖️ *(optional in prototype)*
+
+### 2️⃣ Mobile Application
+
+* 📲 Plant type selection
+* 📲 Fetch real-time sensor data (via Bluetooth/Wi-Fi)
+* 📲 Display comparison (Optimal vs. Actual values)
+* 📲 Generate actionable suggestions
+
+### 3️⃣ Knowledge Base
+
+* Database of optimal soil ranges per plant species
+* Rule-based recommendation engine (prototype)
+* *(Future)* AI/ML-powered smart insights
+
+---
+
+## 🛤️ Roadmap
+
+### ✅ Phase 1 – Hardware Prototype
+
+* ESP32 + Soil Moisture Sensor setup
+* Arduino sketch for reading values
+
+### ✅ Phase 2 – Basic Mobile App
+
+* Plant selection UI
+* Side-by-side comparison layout
+
+### ✅ Phase 3 – Communication
+
+* ESP32 → Mobile App via Bluetooth/Wi-Fi
+
+### ✅ Phase 4 – Smart Suggestions
+
+* Rule-based logic (e.g., *If Nitrogen < required → Suggest Fertilizer X*)
+* Future integration with cloud databases
+
+---
+
+## 📲 Prototype Focus
+
+* ESP32 + Soil Moisture Sensor
+* Real-time moisture measurement
+* Mobile app comparison with ideal plant values
+* Simple rule-based watering/fertilizer suggestions
+
+---
+
+## ⚡ Tech Stack
+
+* **Hardware:** ESP32, Soil Moisture Sensor, NPK Sensor, pH Sensor
+* **Firmware:** Arduino IDE (C/C++)
+* **Mobile App:** Flutter / React Native / Native Android
+* **Communication:** Bluetooth / Wi-Fi (MQTT/HTTP)
+* **Database (Future):** Firebase / Supabase / SQLite
+
+---
+
+## 📖 Example Workflow
+
+1. User selects plant type (*e.g., Tomato*) in app
+2. App fetches soil data from ESP32
+3. App compares values with tomato’s ideal requirements
+4. If nutrients are low → Suggest fertilizer type & dosage
+5. If moisture is low → Recommend irrigation strategy
+6. Farmer acts → Soil balance restored → Higher yield 🌱
+
+---
+
+## 🖼️ System Architecture
+
 ```
+[Soil Sensors] → [ESP32 Controller] → [Mobile App] → [User Recommendations]
+```
+![](public/smartindia/overallpart.jpeg)
+![](public/smartindia/esp2working.jpeg)
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📂 PPT Presentation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+![](public/smartindia/SIH2025-IDEA-Presentation-Format\(2\)%20\(1\).pptx)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🌟 Future Enhancements
 
-To learn more about Next.js, take a look at the following resources:
+* 📊 Data history with interactive graphs
+* 🌍 Weather-based smart irrigation
+* 🤖 AI-powered crop care assistant
+* 🚜 Multi-plant farm monitoring
+* ☁️ Cloud integration for remote access
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🤝 Contribution
 
-## Deploy on Vercel
+We welcome contributions to improve Plantologica!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* Fork the repo
+* Create a feature branch
+* Submit a pull request
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📜 License
+
+Licensed under the **MIT License** – free for academic, personal, and commercial use.
+
+---
+
+## 👨‍💻 Team Plantologica – SIH 2025 Internal Hackathon
+
+* **Shadil AM** – Project Manager & Developer
+* **Abhiram** – Developer
+* **Afiq** – Developer
+* **Nayana** – Presentation & Documentation Lead
+* **Nirjan** – Hardware Expert
+* **Ribin** – Hardware Simulation Specialist
+
+💐 **Special Thanks to Gopika for supporting our team.**
+
+🚀 Open to collaboration with IoT, agriculture, and mobile app developers.
+
+---
+
+✅ Now this README is **clean, professional, and hackathon-ready**.
+Do you want me to also make a **shortened 1-page version** for your judges (since hackathon juries prefer concise summaries), or keep this detailed one only?
