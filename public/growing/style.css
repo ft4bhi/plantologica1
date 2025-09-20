@@ -1,0 +1,18 @@
+body {
+  background: transparent;
+}
+
+#canvas_container_div {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none; /* allow clicks to pass through */
+}
+
+#canvas {
+  width: min(100vmin, 900px);
+  height: min(100vmin, 900px);
+  background: transparent;
+  opacity: 0.25; /* subtle background */
+}
