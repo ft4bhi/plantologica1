@@ -1,15 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Enable static exports for Netlify
+  // Enable static exports
   output: 'export',
-  // Base path for GitHub Pages deployment
+  // Base path for production
   basePath: process.env.NODE_ENV === 'production' ? '' : undefined,
-  // Enable static HTML export
+  // Configure images for static export
   images: {
-    unoptimized: true, // Required for static exports
+    unoptimized: true,
     domains: ['images.unsplash.com'],
   },
+  // Webpack configuration
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -17,9 +18,15 @@ const nextConfig = {
     });
     return config;
   },
-  // Optional: Add environment variables that should be available at build time
+  // Environment variables
   env: {
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'https://your-site-name.netlify.app',
+  },
+  // Disable image optimization during export
+  experimental: {
+    images: {
+      unoptimized: true,
+    },
   },
 };
 

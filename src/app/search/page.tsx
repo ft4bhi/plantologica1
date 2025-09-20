@@ -33,7 +33,7 @@ export default function SearchPage() {
   );
   
   const handlePlantSelect = (plant: Plant) => {
-    router.push(`/search/compare?plantId=${plant.id}`);
+    router.push(`/search/compare/${plant.id}`);
   };
 
   return (

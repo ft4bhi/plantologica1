@@ -116,7 +116,7 @@ export default function LibraryPage() {
   const [selectedType, setSelectedType] = useState('All');
   const [selectedPlant, setSelectedPlant] = useState<Plant | null>(null);
 
-  const plantTypes = ['All', ...new Set(PLANT_DB.map(plant => plant.type))];
+  const plantTypes = ['All', ...Array.from(new Set(PLANT_DB.map(plant => plant.type)))];
   
   const filteredPlants = PLANT_DB.filter(plant => 
     (plant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
