@@ -1,0 +1,19 @@
+import { Metadata } from 'next';
+import CompareClient from './CompareClient';
+
+// This function tells Next.js which dynamic routes to pre-render
+export async function generateStaticParams() {
+  return Array.from({ length: 8 }, (_, i) => ({
+    plantId: (i + 1).toString(),
+  }));
+}
+
+type PageProps = {
+  params: { plantId: string };
+};
+
+export default function Page({ params }: PageProps) {
+  return <CompareClient plantId={params.plantId} />;
+}
+
+export const dynamicParams = false; // Only generate pages defined in generateStaticParams
