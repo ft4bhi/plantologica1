@@ -33,11 +33,6 @@ Thus, **Plantologica acts as a digital assistant for precision agriculture**, re
 
 ---
 
-
-
-
----
-
 ## 🚀 Key Features
 
 * 📊 Real-time soil monitoring (Moisture, NPK, pH)
@@ -166,7 +161,7 @@ We welcome contributions to improve Plantologica!
 
 ## 📜 License
 
-Licensed under the **MIT License** – free for academic, personal, and commercial use.
+Licensed under the **Apache License** – free for academic, personal, and commercial use.
 
 ---
 
@@ -175,15 +170,12 @@ Licensed under the **MIT License** – free for academic, personal, and commerci
 * **Shadil AM** – Project Manager & Developer
 * **Abhiram** – Developer
 * **Afiq** – Developer
-* **Nayana** – Presentation & Documentation Lead
-* **Nirjan** – Hardware Expert
-* **Ribin** – Hardware Simulation Specialist
+* **Nayana** – Presentation Expert
+* **Nirajan** – Hardware Expert
+* **Ribin** – Hardware Expert
 
 💐 **Special Thanks to Gopika for supporting our team.**
 
 🚀 Open to collaboration with IoT, agriculture, and mobile app developers.
 
----
 
-✅ Now this README is **clean, professional, and hackathon-ready**.
-Do you want me to also make a **shortened 1-page version** for your judges (since hackathon juries prefer concise summaries), or keep this detailed one only?
